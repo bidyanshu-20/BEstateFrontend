@@ -26,7 +26,7 @@ const Listing = () => {
     const fetchListing = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/get/${params.listingId}`);
+        const res = await fetch(`/api/listing/get/${params.listingId}`);
         const data = await res.json();
         if (!data) {
           setError(true);

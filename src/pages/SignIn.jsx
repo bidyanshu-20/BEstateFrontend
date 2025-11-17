@@ -21,9 +21,9 @@ const SignIn = () => {
     e.preventDefault();
     try {
       dispatch(signInStart());
-      const res = await fetch("https://b-estate-backend.vercel.app/api/auth/signin", {
+      const res = await fetch("/api/auth/signin", {
         method: "POST",
-        credentials: "include",
+        // credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
 

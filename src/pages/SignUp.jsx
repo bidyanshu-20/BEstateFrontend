@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 
 const SignUp = () => {
-  const [formdata, setformdata] = useState({});
+  const [formdata, setformdata] = useState({ username: "", email: "", password: "" }); // initialize fields
   const [error, seterror] = useState(null);
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
@@ -18,38 +18,39 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setloading(true);
+    if (!formdata.username || !formdata.email || !formdata.password) {
+      seterror("All fields are required!");
+      setloading(false);
+      return;
+    }
+
     try {
-      const res = await fetch("https://b-estate-backend.vercel.app/api/auth/signup", {
+      const res = await fetch("/api/auth/signup", {
         method: "POST",
-       credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formdata),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formdata), // now password is always sent
       });
+
       const data = await res.json();
       if (data.success === false) {
         seterror(data.message);
         setloading(false);
         return;
       }
+
       setloading(false);
       seterror(null);
       navigate("/signin");
-    } catch (error) {
+    } catch (err) {
       setloading(false);
-      seterror(error.message);
+      seterror(err.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-blue-900 text-white relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute top-10 left-10 w-60 h-60 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-
-      <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.5)] rounded-3xl p-10 w-full max-w-md transition-all duration-500 hover:shadow-[0_8px_40px_rgba(0,255,255,0.2)]">
-        <h2 className="text-3xl font-extrabold text-center bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-blue-900 text-white">
+      <div className="relative z-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-10 w-full max-w-md">
+        <h2 className="text-3xl font-extrabold text-center mb-8">
           Create Your Account
         </h2>
 
@@ -57,41 +58,40 @@ const SignUp = () => {
           <input
             type="text"
             placeholder="Username"
-            className="bg-white/10 border border-white/20 text-white placeholder-gray-300 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
             id="username"
+            value={formdata.username} // controlled input
             onChange={handleChange}
+            className="p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
           />
           <input
             type="email"
             placeholder="Email"
-            className="bg-white/10 border border-white/20 text-white placeholder-gray-300 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
             id="email"
+            value={formdata.email} // controlled input
             onChange={handleChange}
+            className="p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
           />
           <input
             type="password"
             placeholder="Password"
-            className="bg-white/10 border border-white/20 text-white placeholder-gray-300 p-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-300"
             id="password"
+            value={formdata.password} // controlled input
             onChange={handleChange}
+            className="p-4 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            required
           />
 
           <button
             disabled={loading}
-            className={`relative overflow-hidden text-white p-3 rounded-2xl uppercase font-semibold transition-all duration-500 ${
+            className={`p-3 rounded-2xl uppercase font-semibold ${
               loading
                 ? "bg-gray-600 cursor-not-allowed"
-                : "bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-500 hover:scale-105 hover:shadow-[0_0_20px_rgba(0,255,255,0.5)]"
+                : "bg-gradient-to-r from-blue-500 to-purple-500 hover:scale-105"
             }`}
           >
-            {loading ? (
-              <span className="flex justify-center items-center gap-2">
-                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-                Loading...
-              </span>
-            ) : (
-              "Sign Up"
-            )}
+            {loading ? "Loading..." : "Sign Up"}
           </button>
 
           <OAuth />
@@ -99,8 +99,8 @@ const SignUp = () => {
 
         <div className="flex justify-center items-center gap-2 mt-6 text-gray-300 text-sm">
           <p>Already have an account?</p>
-          <Link to={"/signin"}>
-            <span className="text-cyan-400 font-semibold hover:underline hover:text-cyan-300 transition-all cursor-pointer">
+          <Link to="/signin">
+            <span className="text-cyan-400 font-semibold hover:underline cursor-pointer">
               Sign In
             </span>
           </Link>
