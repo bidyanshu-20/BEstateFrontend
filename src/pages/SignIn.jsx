@@ -26,6 +26,7 @@ const SignIn = () => {
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
+
       });
       const data = await res.json();
       if (data.success === false) {
@@ -33,6 +34,7 @@ const SignIn = () => {
         return;
       }
       dispatch(signInsuccess(data));
+      console.log(data);
       navigate("/");
     } catch (error) {
       dispatch(signInfailure(error.message));
