@@ -31,7 +31,7 @@ const UpdateListing = () => {
     const fetchListing = async () => {
       try {
         const listingId = params.listingId;
-        const res = await fetch(`/api/listing/get/${listingId}`);
+        const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/get/${listingId}`);
         const data = await res.json();
         if (!data) {
           console.log("ERROR HAS OCCURRED IN FETCHING DATA....");
@@ -152,7 +152,7 @@ const UpdateListing = () => {
       // remove userRef from payload
       const { userRef, ...payload } = formdata;
 
-      const res = await fetch(`/api/listing/update/${params.listingId}`, {
+      const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/update/${params.listingId}`, {
         method: "PUT",
         credentials: "include",
         headers: {

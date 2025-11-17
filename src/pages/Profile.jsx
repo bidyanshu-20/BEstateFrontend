@@ -78,7 +78,7 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
       const res = await fetch(
-        `/api/user/update/${currentUser._id}`,
+        `https://b-estate-backend.vercel.app/api/user/update/${currentUser._id}`,
         {
           method: "POST",
           credentials: "include",
@@ -103,7 +103,7 @@ const Profile = () => {
     try {
       dispatch(deleteUserStart());
       const res = await fetch(
-        `/api/user/delete/${currentUser._id}`,
+        `https://b-estate-backend.vercel.app/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -124,11 +124,11 @@ const Profile = () => {
     try {
       dispatch(signoutUserStart());
       const res = await fetch(
-        "/api/auth/signout",
-        // {
-        //   method: "GET",
-        //   credentials: "include",
-        // }
+        "https://b-estate-backend.vercel.app/api/auth/signout",
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
       const data = await res.json();
       if (data.success === false) {
@@ -145,7 +145,7 @@ const Profile = () => {
     try {
       setshowlistingsError(false);
       const res = await fetch(
-        `/api/user/listings/${currentUser._id}`
+        `https://b-estate-backend.vercel.app/api/user/listings/${currentUser._id}`
       );
       const data = await res.json();
       if (data.success === false) {
@@ -161,10 +161,10 @@ const Profile = () => {
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(
-        `/api/listing/delete/${listingId}`,
+        `https://b-estate-backend.vercel.app/api/listing/delete/${listingId}`,
         {
           method: "DELETE",
-          // credentials: "include",
+          credentials: "include",
         }
       );
       const data = await res.json();

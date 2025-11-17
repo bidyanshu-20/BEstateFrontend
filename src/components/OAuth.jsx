@@ -15,8 +15,9 @@ const handleGoogleClick = async ()=>{
 
       const result = await signInWithPopup(auth,provider);
     //   console.log(result);
-    const res = await fetch('/api/auth/google',{
+    const res = await fetch('https://b-estate-backend.vercel.app/api/auth/google',{
         method: 'POST',
+        credentials: "include" ,// important for cookies
         headers:{
             'Content-Type': 'application/json',
         },
@@ -27,7 +28,7 @@ const handleGoogleClick = async ()=>{
     navigate("/");
  }
  catch (error){
-    console.log("Could not signIn with google",error);
+  alert("Failed to sign in with Google. Please try again.");
  }
 }
 
