@@ -21,6 +21,7 @@ const SignUp = () => {
     try {
       const res = await fetch("https://b-estate-backend.vercel.app/api/auth/signup", {
         method: "POST",
+       credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

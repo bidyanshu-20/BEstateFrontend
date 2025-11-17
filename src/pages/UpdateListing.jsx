@@ -154,6 +154,7 @@ const UpdateListing = () => {
 
       const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/update/${params.listingId}`, {
         method: "PUT",
+         credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

@@ -132,14 +132,19 @@ const CreateListing = () => {
         userRef: currentUser._id,
       };
       // console.log("Payload----->>", payload);
-      console.log(formdata);
-      const res = await fetch("https://b-estate-backend.vercel.app/api/listing/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      // console.log(formdata);
+      const res = await fetch(
+        "https://b-estate-backend.vercel.app/api/listing/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include", // REQUIRED for authentication
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
       const data = await res.json();
       setloading(false);
       if (data.success === false) {
@@ -152,7 +157,6 @@ const CreateListing = () => {
     }
   };
   return (
-
     <main className="min-h-screen p-6 flex items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       {/* Board with bg image + gradient overlay */}
       <div

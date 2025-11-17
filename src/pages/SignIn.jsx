@@ -23,6 +23,7 @@ const SignIn = () => {
       dispatch(signInStart());
       const res = await fetch("https://b-estate-backend.vercel.app/api/auth/signin", {
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formdata),
       });
