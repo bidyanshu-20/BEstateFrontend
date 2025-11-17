@@ -131,9 +131,9 @@ const CreateListing = () => {
         ...formdata,
         userRef: currentUser._id,
       };
-      console.log("Payload----->>", payload);
+      // console.log("Payload----->>", payload);
       console.log(formdata);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch("https://b-estate-backend.vercel.app/api/listing/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
