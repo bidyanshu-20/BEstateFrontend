@@ -141,7 +141,6 @@ const CreateListing = () => {
             "Content-Type": "application/json",
           },
           credentials: "include", // REQUIRED for authentication
-          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         }
       );

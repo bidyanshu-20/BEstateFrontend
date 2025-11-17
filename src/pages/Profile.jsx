@@ -106,6 +106,7 @@ const Profile = () => {
         `https://b-estate-backend.vercel.app/api/user/delete/${currentUser._id}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       const data = await res.json();
@@ -123,7 +124,11 @@ const Profile = () => {
     try {
       dispatch(signoutUserStart());
       const res = await fetch(
-        "https://b-estate-backend.vercel.app/api/auth/signout"
+        "https://b-estate-backend.vercel.app/api/auth/signout",
+        {
+          method: "GET",
+          credentials: "include",
+        }
       );
       const data = await res.json();
       if (data.success === false) {
