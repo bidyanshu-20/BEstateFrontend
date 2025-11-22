@@ -53,7 +53,7 @@ const Search = () => {
       setloading(true);
       setshowMore(false);
       const searchQuery = urlParams.toString();
-      const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/get?${searchQuery}`);
+      const res = await fetch(`https://bestatebackend.onrender.com/api/listing/get?${searchQuery}`);
       const data = await res.json();
       if (data.length > 9) {
         setshowMore(true);
@@ -114,7 +114,7 @@ const Search = () => {
     const urlparams = new URLSearchParams(location.search);
     urlparams.set("startIndex", startIndex);
     const searchQuery = urlparams.toString();
-    const res = await fetch(`https://b-estate-backend.vercel.app/api/listing/get?${searchQuery}`);
+    const res = await fetch(`https://bestatebackend.onrender.com/api/listing/get?${searchQuery}`);
     const data = await res.json();
     if (data.length < 9) {
       setshowMore(false);

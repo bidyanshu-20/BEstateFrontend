@@ -134,7 +134,7 @@ const CreateListing = () => {
       // console.log("Payload----->>", payload);
       // console.log(formdata);
       const res = await fetch(
-        "https://b-estate-backend.vercel.app/api/listing/create",   // https://b-estate-backend.vercel.app
+        "https://bestatebackend.onrender.com/api/listing/create",   
         {
           method: "POST",
           headers: {

@@ -14,7 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchofferListings = async () => {
       try {
-        const res = await fetch("https://b-estate-backend.vercel.app/api/listing/get?offer=true&limit=4");
+        const res = await fetch("https://bestatebackend.onrender.com/api/listing/get?offer=true&limit=4");
         const data = await res.json();
         setOfferListing(data);
         fetchRentListings();
@@ -25,7 +25,7 @@ const Home = () => {
 
     const fetchRentListings = async () => {
       try {
-        const res = await fetch("https://b-estate-backend.vercel.app/api/listing/get?type=rent&limit=4");
+        const res = await fetch("https://bestatebackend.onrender.com/api/listing/get?type=rent&limit=4");
         const data = await res.json();
         setrentListing(data);
         fetchsaleListings();
@@ -36,7 +36,7 @@ const Home = () => {
 
     const fetchsaleListings = async () => {
       try {
-        const res = await fetch("https://b-estate-backend.vercel.app/api/listing/get?type=sale&limit=4");
+        const res = await fetch("https://bestatebackend.onrender.com/api/listing/get?type=sale&limit=4");
         const data = await res.json();
         setsaleListing(data);
       } catch (error) {
